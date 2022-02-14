@@ -1,6 +1,8 @@
 messages:
   noPermissions: '&cНедостаточно прав!'
+  playerIsAdmin: '&cИгрок является администратором.'
   noSpawnLocation: 'Точка спавна отсутствует! Зарегистрируйте её в config.yml'
+  noPlayer: '&cИгрок не найден.'
 donateList:
   default: '&4default'
   default1: '&cdefault1'

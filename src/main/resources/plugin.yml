@@ -2,6 +2,7 @@ name: AdminGUI
 version: '${project.version}'
 main: maksinus.admingui.AdminGUI
 api-version: 1.16
+softdepend: [LuckPerms]
 commands:
   admingui:
     aliases: [agui, admin]

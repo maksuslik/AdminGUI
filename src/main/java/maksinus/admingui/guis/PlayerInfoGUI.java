@@ -2,6 +2,9 @@ package maksinus.admingui.guis;
 
 import maksinus.admingui.AdminGUI;
 import maksinus.admingui.utils.Colorize;
+import net.luckperms.api.LuckPerms;
+import net.luckperms.api.model.group.Group;
+import net.luckperms.api.model.user.User;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,6 +14,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.plugin.RegisteredServiceProvider;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -109,13 +113,26 @@ public class PlayerInfoGUI implements Listener {
                     p.chat("/ban " + target.getName());
                     return;
                 case DIAMOND:
-                    DonateGUI.donate(p);
+                    RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
+                    if (provider != null) {
+                        LuckPerms api = provider.getProvider();
+                        User user = api.getUserManager().getUser(targetName);
+                        if(user == null) {
+                            p.sendMessage(Colorize.color(AdminGUI.getInstance().getConfig().getString("messages.noPlayer")));
+                            return;
+                        }
+                        if(user.getPrimaryGroup().equalsIgnoreCase("own") || user.getPrimaryGroup().equalsIgnoreCase("moderator")) {
+                            e.getWhoClicked().sendMessage(Colorize.color(AdminGUI.getInstance().getConfig().getString("messages.playerIsAdmin")));
+                            return;
+                        }
+                        DonateGUI.donate(p);
+                    }
                     return;
                 case ENDER_EYE:
                     p.chat("/tp " + target.getName());
                     return;
                 case ENDER_PEARL:
-                    p.chat("/tp " + p.getName() + " " + target.getName());
+                    p.chat("/tp " + target.getName() + " " + p.getName());
                     return;
                 case RED_STAINED_GLASS_PANE:
                     p.chat("/kill " + target.getName());

@@ -2,6 +2,10 @@ package maksinus.admingui.guis;
 
 import maksinus.admingui.AdminGUI;
 import maksinus.admingui.utils.Colorize;
+import net.luckperms.api.LuckPerms;
+import net.luckperms.api.model.group.Group;
+import net.luckperms.api.model.user.User;
+import net.luckperms.api.query.QueryOptions;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -12,6 +16,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.RegisteredServiceProvider;
 
 import java.util.Objects;
 
@@ -65,6 +70,11 @@ public class DonateGUI implements Listener {
     public void donateClick(InventoryClickEvent e) {
         if(e.getView().getTitle().equalsIgnoreCase("Выдать донат")) {
             String targetName = PlayerInfoGUI.targetName;
+            Player player = Bukkit.getPlayerExact(targetName);
+            if(player == null) {
+                e.getWhoClicked().sendMessage(Colorize.color(AdminGUI.getInstance().getConfig().getString("messages.noPlayer")));
+                e.getWhoClicked().sendMessage(String.valueOf(player));
+            }
             e.setCancelled(true);
             switch (Objects.requireNonNull(e.getCurrentItem()).getType()) {
                 case RED_TERRACOTTA:
