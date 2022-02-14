@@ -1,0 +1,12 @@
+name: AdminGUI
+version: '1.0.0'
+main: maksinus.admingui.AdminGUI
+api-version: 1.16
+commands:
+  admingui:
+    aliases: [agui, admin]
+    description: Admin gui
+    usage: /admingui
+  asetspawn:
+    description: Set spawn
+    usage: /asetspawn

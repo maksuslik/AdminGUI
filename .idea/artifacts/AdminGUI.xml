@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="AdminGUI">
+    <output-path>D:/slimeworld/lobby/plugins</output-path>
+    <root id="archive" name="AdminGUI.jar">
+      <element id="module-output" name="AdminGUI" />
+      <element id="dir-copy" path="$PROJECT_DIR$/src/main/resources" />
+    </root>
+  </artifact>
+</component>

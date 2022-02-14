@@ -1,0 +1,11 @@
+messages:
+  noPermissions: '&cНедостаточно прав!'
+  reloadConfig: '&aКонфиг был успешно перезагружен!'
+  noSpawnLocation: 'Точка спавна отсутствует! Зарегистрируйте её в config.yml'
+donateList:
+  default: '&4default'
+  default1: '&cdefault1'
+  default2: '&6default2'
+  builder: '&ebuilder'
+  helper: '&ahelper'
+  moderator: '&bmoderator'
