@@ -1,6 +1,5 @@
 messages:
   noPermissions: '&cНедостаточно прав!'
-  reloadConfig: '&aКонфиг был успешно перезагружен!'
   noSpawnLocation: 'Точка спавна отсутствует! Зарегистрируйте её в config.yml'
 donateList:
   default: '&4default'

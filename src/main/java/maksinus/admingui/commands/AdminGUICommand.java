@@ -3,6 +3,7 @@ package maksinus.admingui.commands;
 import maksinus.admingui.AdminGUI;
 import maksinus.admingui.guis.OnlinePlayersGUI;
 import maksinus.admingui.guis.PlayerInfoGUI;
+import maksinus.admingui.utils.Colorize;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,7 +17,7 @@ public class AdminGUICommand implements CommandExecutor {
         if(!(sender instanceof Player)) return true;
         Player p = (Player) sender;
         if(!p.hasPermission("admingui.use")) {
-            p.sendMessage(Objects.requireNonNull(AdminGUI.getInstance().getConfig().getString("messages.noPermissions")));
+            p.sendMessage(Colorize.color(Objects.requireNonNull(AdminGUI.getInstance().getConfig().getString("messages.noPermissions"))));
             return true;
         }
         OnlinePlayersGUI.players(p);

@@ -26,7 +26,7 @@ public final class AdminGUI extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        getLogger().info("Disabled!");
     }
 
     public static AdminGUI getInstance() {
