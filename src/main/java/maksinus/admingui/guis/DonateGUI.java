@@ -76,6 +76,7 @@ public class DonateGUI implements Listener {
                 e.getWhoClicked().sendMessage(String.valueOf(player));
             }
             e.setCancelled(true);
+            if(e.getCurrentItem() == null) return;
             switch (Objects.requireNonNull(e.getCurrentItem()).getType()) {
                 case RED_TERRACOTTA:
                     Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user " + targetName + " parent set default");

@@ -28,17 +28,14 @@ public class PlayerInfoGUI implements Listener {
         Player p = (Player) e.getWhoClicked();
         if (e.getView().getTitle().equalsIgnoreCase("Игроки")) {
             e.setCancelled(true);
-
-            OfflinePlayer playername = Bukkit.getOfflinePlayer(e.getCurrentItem().getItemMeta().getDisplayName());
+            if(e.getCurrentItem() == null) return;
+            OfflinePlayer playername = Bukkit.getPlayerExact(e.getCurrentItem().getItemMeta().getDisplayName().substring(2));
             Inventory playerInv = Bukkit.createInventory(null, 9, "Информация об игроке");
             // голова
             SkullMeta skull = (SkullMeta) Bukkit.getItemFactory().getItemMeta(Material.PLAYER_HEAD);
             skull.setOwningPlayer(playername);
-            ArrayList<String> lore = new ArrayList<>();
-            lore.add("");
-            skull.setLore(lore);
             ItemStack listedPlayers = new ItemStack(Material.PLAYER_HEAD, 1);
-            skull.setDisplayName(ChatColor.WHITE + playername.getName());
+            skull.setDisplayName(ChatColor.YELLOW + playername.getName());
             listedPlayers.setItemMeta(skull);
             playerInv.setItem(4, listedPlayers);
             // Назад
@@ -99,7 +96,8 @@ public class PlayerInfoGUI implements Listener {
         if (e.getView().getTitle().equalsIgnoreCase("Информация об игроке")) {
             e.setCancelled(true);
             targetName = Objects.requireNonNull(Objects.requireNonNull(e.getInventory().getItem(4)).getItemMeta()).getDisplayName().trim().substring(2);
-            OfflinePlayer target = Bukkit.getOfflinePlayer(targetName);
+            OfflinePlayer target = Bukkit.getPlayerExact(targetName);
+            if(e.getCurrentItem() == null) return;
             switch (e.getCurrentItem().getType()) {
                 case ARROW:
                     OnlinePlayersGUI.players(p);
@@ -121,7 +119,7 @@ public class PlayerInfoGUI implements Listener {
                             p.sendMessage(Colorize.color(AdminGUI.getInstance().getConfig().getString("messages.noPlayer")));
                             return;
                         }
-                        if(user.getPrimaryGroup().equalsIgnoreCase("own") || user.getPrimaryGroup().equalsIgnoreCase("moderator")) {
+                        if(user.getPrimaryGroup().equalsIgnoreCase("own") || user.getPrimaryGroup().equalsIgnoreCase("administrator")) {
                             e.getWhoClicked().sendMessage(Colorize.color(AdminGUI.getInstance().getConfig().getString("messages.playerIsAdmin")));
                             return;
                         }

@@ -25,6 +25,8 @@ public final class AdminGUI extends JavaPlugin {
 
         getCommand("admingui").setExecutor(new AdminGUICommand());
         getCommand("asetspawn").setExecutor(new ASetSpawnCommand());
+
+        getLogger().info("Enabled!");
     }
 
     @Override
